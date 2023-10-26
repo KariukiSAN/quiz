@@ -1,15 +1,15 @@
 import React from 'react';
 
-const ChipList = ({ chips, maxChipsDisplayed, maxTextLength }) => {
-const displayedChips = chips.slice(0, maxChipsDisplayed);
+const truncateLabel = (label, maxLength) => {
+return label.length > maxLength ? label.slice(0, maxLength) + '...' : label;
+};
 
+const ChipList = ({ chips = [], maxChipsDisplayed, maxTextLength }) => {
 return (
     <div className="chip-list">
-    {displayedChips.map((chip, index) => (
+    {chips.slice(0, maxChipsDisplayed).map((chip, index) => (
         <div key={index} className="chip">
-        {chip.label.length > maxTextLength
-            ? chip.label.slice(0, maxTextLength) + '...'
-            : chip.label}
+        {truncateLabel(chip.label, maxTextLength)}
         </div>
     ))}
     </div>
